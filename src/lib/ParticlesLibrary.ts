@@ -187,7 +187,7 @@ export default class ParticlesLibrary {
 				.then(() => {
 					manager.particlesCreate();
 					manager.particlesDraw();
-					
+
 				});
 		} else {
 			vendors.densityAutoParticles();

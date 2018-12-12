@@ -17,6 +17,7 @@ import {
 	IShapeDefinitionEnhanced,
 	IImageDefinitionEnhanced
 } from "./ImageManager";
+import { stat } from "fs";
 
 export type ParticleParams = {
 	color?: IParticleColorDefinition;
@@ -56,6 +57,7 @@ export default class Particle {
 
 	initialPosition: TPoint;
 	shape: IParticleShapeDefinition;
+	staticP: boolean
 
 	constructor(
 		library: ParticlesLibrary,
@@ -67,7 +69,8 @@ export default class Particle {
 			position,
 			shape,
 			size
-		}: ParticleParams = {}
+		}: ParticleParams = {},
+		staticP: boolean = false
 	) {
 		this.library = library;
 		this.setupSize(size);
@@ -76,6 +79,7 @@ export default class Particle {
 		this.setupOpacity(opacity);
 		this.setupAnimation(move);
 		this.setupShape(shape);
+		this.staticP = staticP
 	}
 
 	setupSize(size?: IParticleSizeDefinition): void {
@@ -190,6 +194,10 @@ export default class Particle {
 	setupAnimation(move?: IParticleMoveDefinition) {
 		const defaultMove = this.library.getParameter(p => p.particles.move);
 		move = deepAssign({}, defaultMove, move);
+
+		if (this.staticP) {
+			return;
+		}
 
 		let baseVelocity: TPoint;
 		switch (move.direction) {

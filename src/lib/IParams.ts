@@ -149,6 +149,7 @@ export interface IParams {
 				value_area: number;
 			};
 		};
+		staticParticles?: Array<{x: number, y: number}>,
 		color: IParticleColorDefinition;
 		shape: IParticleShapeDefinition;
 		opacity: IParticleOpacityDefinition;

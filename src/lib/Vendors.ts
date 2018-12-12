@@ -97,8 +97,9 @@ export default class Vendors {
 			Math.PI - (Math.PI * interiorAngleDegrees) / 180;
 		c.save();
 		c.beginPath();
-		c.translate(startX, startY);
+		c.translate(startX + sideLength/2, startY);
 		c.moveTo(0, 0);
+		c.rotate(interiorAngle/2)
 		for (let i = 0; i < sideCount; i++) {
 			c.lineTo(sideLength, 0);
 			c.translate(sideLength, 0);

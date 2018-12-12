@@ -35,6 +35,17 @@ export default class ParticleManager {
 		for (let i = 0; i < particlesNumber; i++) {
 			particles.array.push(new Particle(this.library));
 		}
+		if (particles.staticParticles) {
+			particles.staticParticles.forEach(pos => {
+				particles.array.push(new Particle(this.library, {
+					color: { value: '#CCC' },
+					position: {
+						x: pos.x,
+						y: pos.y
+					},
+				}, true));
+			})
+		}
 	}
 
 	particlesUpdate(): void {
@@ -45,6 +56,9 @@ export default class ParticleManager {
 		const polygon = this.library.getParameter(p => p.polygon);
 
 		particles.array.forEach((particle, i) => {
+			if (particle.staticP) {
+				return;
+			}
 			if (particles.move.enable) {
 				let ms = particles.move.speed / 2;
 				particle.x += particle.vx * ms;
