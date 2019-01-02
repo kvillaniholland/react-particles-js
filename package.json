@@ -2,7 +2,7 @@
   "name": "react-particles-js",
   "version": "2.4.3",
   "description": "Reactified particles.js",
-  "main": "src/index.js",
+  "main": "lib/particles.js",
   "types": "index.d.ts",
   "scripts": {
     "compile": "webpack",
